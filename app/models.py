@@ -23,6 +23,7 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+    address = db.Column(db.String(64), index=True, default=None)
 
     @property
     def password(self):

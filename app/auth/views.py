@@ -6,7 +6,7 @@ from .. import db
 from ..models import User
 from ..email import send_email
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
-    PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
+    PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm, AddressForm
 
 
 @auth.before_app_request
@@ -162,3 +162,13 @@ def change_email(token):
     else:
         flash('Invalid request.')
     return redirect(url_for('main.index'))
+
+@auth.route('/address', methods=['GET', 'POST'])
+@login_required
+def address():
+    form = AddressForm()
+    if form.validate_on_submit():
+        current_user.address = form.address.data
+        db.session.add(current_user)
+        return redirect(url_for('main.index'))
+    return render_template('auth/enter_address.html', form=form)

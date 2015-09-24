@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Snow Angels - Enter your address{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>
+        Hello, {{ current_user.username }}!
+    </h1>
+    <br>
+    <div class="col-md-4">
+        <p>
+            Enter your street address below.
+            We will use this to match you to potential care recipients.
+        </p>
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+{% endblock %}
